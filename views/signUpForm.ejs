@@ -1,0 +1,57 @@
+<div class="main">
+    <div class="form-div">
+      <% if (isEmailExist) { %>
+        <h3>An account with this email already exists. Log in instead. </h3>
+      <% } %>
+      <form class="form" action="" method="post">
+        <input type="text" class="su-li-input" id="firstName" name="firstName" placeholder="First Name">
+        <% if (errors) { %>
+          <% for (let error of errors) { %>
+            <% if (error.param === "firstName") { %>
+              <div error-message><%= error.msg %></div>
+            <% } %>
+          <% } %>
+        <% } %>
+        <input type="text" class="su-li-input" id="lastName" name="lastName" placeholder="Last Name">
+        <% if (errors) { %>
+          <% for (let error of errors) { %>
+            <% if (error.param === "lastName") { %>
+              <div error-message><%= error.msg %></div>
+            <% } %>
+          <% } %>
+        <% } %>
+        <input type="email" class="su-li-input" id="email" name="email" placeholder="Email">
+        <% if (errors) { %>
+          <% for (let error of errors) { %>
+            <% if (error.param === "email") { %>
+              <div error-message><%= error.msg %></div>
+            <% } %>
+          <% } %>
+        <% } %>
+        
+        <input type="password" class="su-li-input" id="password" name="password" placeholder="Password">
+        <% if (errors) { %>
+          <% for (let error of errors) { %>
+            <% if (error.param === "password") { %>
+              <div error-message><%= error.msg %></div>
+            <% } %>
+          <% } %>
+        <% } %>
+        
+        <input type="password" class="su-li-input" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password">
+        <% if (errors) { %>
+          <% for (let error of errors) { %>
+            <% if (error.param === "confirmPassword") { %>
+              <div error-message><%= error.msg %></div>
+            <% } %>
+          <% } %>
+        <% } %>
+        
+        <div class="form-buttons">
+          <button type="submit">Submit</button>
+          <a href="/"><button type="button">Cancel</button></a>
+        </div>
+      </form>
+      <div>Already have an account? <a href="/log-in">Log in</a></div>
+    </div>
+</div>

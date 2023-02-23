@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="stylesheets/style.css">
+</head>
+<body>
+  <div id="contents">
+    <div class="header">
+      <div class="club-name"><a href="/"><h1>Some Club</h1></a></div>
+      <div class="menu-options-container">
+        <% if (user) { %>
+          <a href="create-message"><div class="menu-option">Create Message</div></a>
+          <a href="member"><div class="menu-option">Member</div></a>
+          <a href="admin"><div class="menu-option"></div>Admin</a>
+          <a href="log-out"><div class="menu-option">Log Out</div></a>
+        <% } else { %>
+          <a href="log-in"><div class="menu-option">Log In</div></a>
+          <a href="sign-up"><div class="menu-option">Sign Up</div></a>
+        <% } %>
+      </div>
+    </div>
+    <%- body %>
+    <div class="footer">
+      <div>Copyrights &copy; Shirsho Dipto</div>
+    </div>
+  </div>
+</body>
+</html>
+
