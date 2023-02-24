@@ -1,7 +1,28 @@
 <div class="main">
-  <% if (user) { %>
-    <h1>Welcome <%- user.firstName %> <%- user.lastName %></h1>
+  <% if (messages.length === 0) { %>
+    <h1>Looks like there's no message to display. </h1>
   <% } else { %>
-    <h1>Log In or Sign Up.</h1>
+    <% for (let message of messages) { %>
+      <div class="message">
+        <div class="username-date">
+          <% if (user && user.isMember) { %>
+            <div class="username"><%- message.user.firstName %> <%- message.user.lastName %></div>
+            <div class="date"><%- message.dateFormatted %></div>
+          <% } else { %>
+            <div class="username">Become a member to view the Author name and date of sending. </div>
+          <% } %>
+        </div>
+          <div class="message-title-container">
+            <div class="message-title"><%- message.title %></div>
+            <% if (user && user.isAdmin) { %>
+              <form action="/delete-message" method="post">
+                <input type="hidden" name="messageid" value="<%- message._id %>">
+                <button type="submit">Delete</button>
+              </form>
+            <% } %>
+          </div>
+        <div class="mesageText"><%- message.text %></div>
+      </div>
+    <% } %>
   <% } %>
 </div>

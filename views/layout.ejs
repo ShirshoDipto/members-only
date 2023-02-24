@@ -15,8 +15,8 @@
         <% if (user) { %>
           <a href="create-message"><div class="menu-option">Create Message</div></a>
           <a href="member"><div class="menu-option">Member</div></a>
-          <a href="admin"><div class="menu-option"></div>Admin</a>
-          <a href="log-out"><div class="menu-option">Log Out</div></a>
+          <a href="admin"><div class="menu-option">Admin</div></a>
+          <a href="log-out"><div class="menu-option"><%- user.firstName %> (Log Out)</div></a>
         <% } else { %>
           <a href="log-in"><div class="menu-option">Log In</div></a>
           <a href="sign-up"><div class="menu-option">Sign Up</div></a>

@@ -4,9 +4,7 @@ const userController = require("../controllers/userController");
 const messageController = require("../controllers/messageController")
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Members Only', user: req.user });
-});
+router.get('/', messageController.messageList);
 
 
 /* User related routes */
@@ -24,7 +22,15 @@ router.get("/member", userController.becomeMemberGet)
 
 router.post("/member", userController.becomeMemberPost)
 
+router.get("/admin", userController.becomeAdminGet)
+
+router.post("/admin", userController.becomeAdminPost)
+
 /** Message realted routes */
 router.get("/create-message", messageController.createMessageGet)
+
+router.post("/create-message", messageController.createMessagePost)
+
+router.post("/delete-message", messageController.deleteMessage)
 
 module.exports = router;

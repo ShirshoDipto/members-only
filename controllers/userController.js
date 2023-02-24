@@ -193,7 +193,7 @@ exports.becomeMemberPost = [
   
       if (!errors.isEmpty()) {
         res.render("/member", {
-          title: "Become Member",
+          title: "Become a Member",
           user: req.user,
           authError: undefined,
           error: errors.array()
@@ -209,7 +209,63 @@ exports.becomeMemberPost = [
         return res.redirect("/member")
       } else {
         res.render("member", {
-          title: "Become Member",
+          title: "Become a Member",
+          user: req.user,
+          authError: undefined,
+          error: [{msg: "Invalid Secret Code. "}]
+        })
+        return
+      }
+    } catch(err) {
+      return next(err)
+    }
+  }
+]
+
+exports.becomeAdminGet = (req, res, next) => {
+  if (req.user) {
+    res.render("admin", { 
+      title: "Become an Admin", 
+      user: req.user,
+      authError: undefined,
+      error: undefined
+    })
+  } else {
+    const err = new Error("Sign in to access the content of the url. ")
+    err.status = 404;
+    return next(err)
+  }
+}
+
+exports.becomeAdminPost = [
+  body("becomeAdmin", "Field cannot be empty. ")
+  .trim()
+  .isLength({min: 1})
+  .escape(),
+
+  async (req, res, next) => {
+    try {
+      const errors = validationResult(req)
+  
+      if (!errors.isEmpty()) {
+        res.render("/admin", {
+          title: "Become an Admin",
+          user: req.user,
+          authError: undefined,
+          error: errors.array()
+        })
+        return
+      }
+
+      const code = await Code.findOne({})
+
+      if (code.admin === req.body.becomeAdmin) {
+        req.user.isAdmin = true
+        await req.user.save()
+        return res.redirect("/admin")
+      } else {
+        res.render("admin", {
+          title: "Become an Admin",
           user: req.user,
           authError: undefined,
           error: [{msg: "Invalid Secret Code. "}]

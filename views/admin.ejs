@@ -1,14 +1,14 @@
 <div class="main">
-  <% if (user && user.isMember) { %>
-    <h1>Congratulations! You are a Member of this club. </h1>
+  <% if (user && user.isAdmin) { %>
+    <h1>Congratulations! You have been given admin previleges. </h1>
   <% } else { %>
     <div class="form-div">
       <% if (authError) { %>
         <h3><%- authError %></h3>
       <% } %>
       <form class="form" action="" method="post">
-        <label for="becomeMember"><h2>Enter the secret password to become a member.</h2> </label>
-        <input type="password" class="su-li-input" id="becomeMember" name="becomeMember" placeholder="Enter Secret Code">
+        <label for="becomeAdmin"><h2>Enter the secret password to have admin previleges.</h2> </label>
+        <input type="password" class="su-li-input" id="becomeAdmin" name="becomeAdmin" placeholder="Enter Secret Code">
         <% if (error) { %>
             <div error-message><%= error[0].msg %></div>
           <% } %>
@@ -19,5 +19,4 @@
       </form>
     </div>
   <% } %>
-  
 </div>
